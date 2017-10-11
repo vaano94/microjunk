@@ -12,6 +12,7 @@
 
     <modules>
         <module>payment-sender</module>
+        <module>notification-service</module>
 
     </modules>
 

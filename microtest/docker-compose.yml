@@ -1,0 +1,28 @@
+version: '2.1'
+services:
+
+  payment-mongodb:
+    environment:
+        MONGODB_PASSWORD: user
+    build : mongodb/.
+    image : mongodb-micro
+    restart: always
+    ports:
+          - 27017:27017
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  payment-sender:
+          build : payment-sender/.
+          image : payment-sender
+          restart: always
+          ports:
+                - 6000:6000
+          links:
+                - payment-mongodb
+          logging:
+            options:
+              max-size: "10m"
+              max-file: "10"

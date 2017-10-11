@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: payment-sender
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: true
+  data:
+      mongodb:
+        host: payment-mongodb
+        username: user
+        password: user
+        database: piggymetrics
+        port: 27017
+
+server:
+  context-path: /payments
+  port: 6000

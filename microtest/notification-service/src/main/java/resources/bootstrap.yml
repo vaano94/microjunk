@@ -1,6 +1,6 @@
 spring:
   application:
-    name: payment-sender
+    name: notification-service
 
   data:
       mongodb:
@@ -8,7 +8,7 @@ spring:
         username: user
         password: user
         database: piggymetrics
-        port: 27017
+        port: 27016
 
 eureka:
   instance:
@@ -18,5 +18,5 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
 
 server:
-  context-path: /payments
-  port: 6000
+  context-path: /notification
+  port: 7000

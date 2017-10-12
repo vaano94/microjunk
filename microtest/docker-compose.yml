@@ -22,7 +22,46 @@ services:
                 - 6000:6000
           links:
                 - payment-mongodb
+                - registry
           logging:
             options:
               max-size: "10m"
               max-file: "10"
+
+  notification-mongodb:
+      environment:
+          MONGODB_PASSWORD: user
+      build : mongodb/.
+      image : mongodb-notification
+      restart: always
+      ports:
+            - 27016:27017
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
+
+  notification-service:
+            build : notification-service/.
+            image : notification-service
+            restart: always
+            ports:
+                  - 7000:7000
+            links:
+                  - notification-mongodb
+                  - registry
+            logging:
+              options:
+                max-size: "10m"
+                max-file: "10"
+  registry:
+      build : registry/.
+      image: registry
+      restart: always
+      ports:
+        - 8761:8761
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"

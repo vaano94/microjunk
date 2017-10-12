@@ -13,7 +13,7 @@
     <modules>
         <module>payment-sender</module>
         <module>notification-service</module>
-
+        <module>registry</module>
     </modules>
 
 

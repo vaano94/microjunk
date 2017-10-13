@@ -19,4 +19,4 @@ eureka:
 
 server:
   context-path: /payments
-  port: 6000
+  port: 9000

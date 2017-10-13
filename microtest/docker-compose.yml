@@ -19,7 +19,7 @@ services:
           image : payment-sender
           restart: always
           ports:
-                - 6000:6000
+                - 9000:9000
           links:
                 - payment-mongodb
                 - registry

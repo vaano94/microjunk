@@ -1,10 +1,10 @@
-
 server:
-  port : 10000
+  port: 10000
 
 spring:
   application:
     name: gateway
+
 
 zuul:
   ignoredServices: '*'
@@ -12,17 +12,25 @@ zuul:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
 
+  # works via ip request, example: localhost:10000/payments/
   routes:
     payment-sender:
+        url: http://localhost:9000/payments
         path: /payments/**
-        serviceId: payment-sender
-        url: http://auth-service:5000
         stripPrefix: false
-        sensitiveHeaders:
+        #sensitiveHeaders:
+
+    # works only with eureka service
+    payment-service:
+          serviceId: payment-sender
+          path: /payment-service/**
 
     notification-service:
         path: /notifications/**
         serviceId: notification-service
-        url: http://notifications:7000
         stripPrefix: false
         sensitiveHeaders:
+
+management:
+  security:
+    enabled: false

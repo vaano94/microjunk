@@ -12,15 +12,15 @@ zuul:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
 
-  # works via ip request, example: localhost:10000/payments/
+  # works via ip request, example: http://localhost:10000/payment-sender/test/get
   routes:
     payment-sender:
         url: http://localhost:9000/payments
-        path: /payments/**
-        stripPrefix: false
+        path: /payment-sender/**
+        #stripPrefix: false
         #sensitiveHeaders:
 
-    # works only with eureka service
+    # works only with eureka service example : http://localhost:10000/payment-service/payments/test/get
     payment-service:
           serviceId: payment-sender
           path: /payment-service/**

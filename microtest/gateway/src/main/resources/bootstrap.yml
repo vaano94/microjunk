@@ -21,15 +21,14 @@ zuul:
         #sensitiveHeaders:
 
     # works only with eureka service example : http://localhost:10000/payment-service/payments/test/get
+    # http://localhost:10000/notification-service/notifications/version calls for another service via feign client
     payment-service:
-          serviceId: payment-sender
-          path: /payment-service/**
+        serviceId: payment-sender
+        path: /payment-service/**
 
     notification-service:
-        path: /notifications/**
         serviceId: notification-service
-        stripPrefix: false
-        sensitiveHeaders:
+        path: /notification-service/**
 
 management:
   security:

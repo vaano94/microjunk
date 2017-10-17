@@ -1,6 +1,6 @@
-package com.microtest.repository;
+package com.microtest.notification.repository;
 
-import com.microtest.domain.NotificationLog;
+import com.microtest.notification.domain.NotificationLog;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

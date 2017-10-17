@@ -1,4 +1,4 @@
-package com.microtest.domain;
+package com.microtest.notification.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

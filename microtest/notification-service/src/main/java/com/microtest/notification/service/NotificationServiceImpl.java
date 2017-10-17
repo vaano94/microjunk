@@ -1,8 +1,8 @@
-package com.microtest.service;
+package com.microtest.notification.service;
 
-import com.microtest.domain.Method;
-import com.microtest.domain.NotificationLog;
-import com.microtest.repository.NotificationRepository;
+import com.microtest.notification.domain.Method;
+import com.microtest.notification.domain.NotificationLog;
+import com.microtest.notification.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.Date;
 @Service
 public class NotificationServiceImpl {
 
-    NotificationRepository repository;
+    private NotificationRepository repository;
 
     @Autowired
     public NotificationServiceImpl(NotificationRepository repository) {

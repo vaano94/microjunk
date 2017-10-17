@@ -1,8 +1,8 @@
 package com.microtest;
 
-import com.microtest.client.PaymentClient;
-import com.microtest.domain.Payment;
-import com.microtest.service.PaymentSenderService;
+import com.microtest.notification.client.NotificationClient;
+import com.microtest.notification.domain.Payment;
+import com.microtest.notification.service.PaymentSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +15,18 @@ public class PaymentController {
 
     private PaymentSenderService paymentSenderService;
 
-    private PaymentClient paymentClient;
-
+    private NotificationClient notificationClient;
 
     @Autowired
-    public PaymentController(PaymentSenderService paymentSenderService, PaymentClient paymentClient) {
+    public PaymentController(PaymentSenderService paymentSenderService, NotificationClient notificationClient) {
         this.paymentSenderService = paymentSenderService;
-        this.paymentClient = paymentClient;
+        this.notificationClient = notificationClient;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/proceed_payment")
     public ResponseEntity<String> proceedPayment(@RequestParam("id") Long id , @RequestParam("accountNumber") int accountNumber, @RequestParam("amount") Long amount) {
         paymentSenderService.proceedPayment(id, accountNumber, amount);
-        return new ResponseEntity<String>("Payment with accountnum : " + accountNumber + " and id: " + id + " has been persisted", null, HttpStatus.OK);
+        return new ResponseEntity<>("Payment with accountnum : " + accountNumber + " and id: " + id + " has been persisted", null, HttpStatus.OK);
     }
 
     public List<Payment> getPayments() {
@@ -36,8 +35,8 @@ public class PaymentController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/version")
     public String version() {
-        return paymentClient.version();
-//        return "123";
+        String version = notificationClient.version();
+        return version;
     }
 
 }

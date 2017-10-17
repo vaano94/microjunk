@@ -1,4 +1,4 @@
-package com.microtest;
+package com.microtest.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 @EnableFeignClients
 //@EnableConfigurationProperties
-@Configuration
 @EnableDiscoveryClient
+@Configuration
 public class NotificationServiceApplication {
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.microtest.domain;
+package com.microtest.notification.domain;
 
 /**
  * Created by john on 10/11/17.

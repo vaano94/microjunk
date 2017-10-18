@@ -33,3 +33,8 @@ zuul:
 management:
   security:
     enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://registry:8761/eureka}

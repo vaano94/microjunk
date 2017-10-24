@@ -1,5 +1,6 @@
 package com.microtest.auth.config;
 
+import com.microtest.auth.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -71,13 +72,21 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                 .inMemory()
                 .withClient("trusted-app")
                         .authorizedGrantTypes("client_credentials","password","refresh_token")
-                    .authorities("ROLE_TRUSTED_CLIENT")
+                    .authorities(Role.ROLE_TRUSTED_CLIENT.toString())
                     .scopes("read","write")
                     .resourceIds(resourceId)
                     .accessTokenValiditySeconds(accessTokenValiditySeconds)
                     .refreshTokenValiditySeconds(refreshTokenValiditySeconds)
-                    .secret("secret");
-
+                    .secret("secret")
+                .and()
+                .withClient("register-app")
+                .authorities(Role.ROLE_REGISTER.toString())
+                .authorizedGrantTypes("client_credentials")
+                .scopes("register")
+                .accessTokenValiditySeconds(10)
+                .refreshTokenValiditySeconds(10)
+                .resourceIds(resourceId)
+                .secret("secret");
     }
 
     @Bean

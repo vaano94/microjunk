@@ -5,12 +5,12 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import twitter4j.Status;
 
 @SpringBootApplication
@@ -18,6 +18,7 @@ import twitter4j.Status;
 //@EnableConfigurationProperties
 @EnableDiscoveryClient
 @EnableScheduling
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 public class PaymentSenderApplication {
 

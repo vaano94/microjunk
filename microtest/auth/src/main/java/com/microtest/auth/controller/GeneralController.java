@@ -1,5 +1,6 @@
 package com.microtest.auth.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class GeneralController {
     }
 
     @GetMapping("/api/admin")
+    @PreAuthorize("permitAll()")
     // If a controller request asks for the Principal user in
     // the method declaration Spring security will provide it.
     public RestMsg helloAdmin(Principal principal){

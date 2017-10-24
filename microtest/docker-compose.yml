@@ -27,6 +27,19 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  auth-mongodb:
+      environment:
+          MONGODB_PASSWORD: user
+      build : mongodb/.
+      image : mongodb-auth
+      restart: always
+      ports:
+            - 27015:27017
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
   payment-sender:
           build : payment-sender/.
           image : payment-sender

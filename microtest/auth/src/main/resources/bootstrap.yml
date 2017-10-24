@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: auth-service
+
+  data:
+      mongodb:
+        host: localhost
+        username: user
+        password: user
+        database: piggymetrics
+        port: 27015
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+
+server:
+  context-path: /auth
+  port: 8081

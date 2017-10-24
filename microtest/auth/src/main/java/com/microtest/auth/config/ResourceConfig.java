@@ -1,15 +1,11 @@
 package com.microtest.auth.config;
 
 
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -52,16 +48,10 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/api/hello").access("hasAnyRole('USER')")
                 .antMatchers("/api/test").access("hasAnyRole('USER')")
 //                .antMatchers("/api/hello").permitAll()
-                .antMatchers("/api/admin").hasRole("ADMIN")
+//                .antMatchers("/api/admin").hasRole("ADMIN")
 
 //                 restricting all access to /api/** to authenticated users
                 .antMatchers("/api/**").authenticated();
-//        http
-//                .requestMatcher(new OAuthRequestedMatcher())
-//                .authorizeRequests().anyRequest().authenticated()
-//                .and()
-//                .csrf().disable();
-
 
     }
 

@@ -1,10 +1,22 @@
+security:
+    oauth2:
+      client:
+        clientId: payment-sender
+        clientSecret: payment
+        accessTokenUri: http://localhost:8081/auth/oauth/token
+        grant-type: client_credentials
+        scope: server
+      resource:
+        token-info-uri: http://localhost:8081/auth/oauth/check_token
+        # spring security discovers service for getting token info in our auth service
+
 spring:
   application:
     name: payment-sender
 
   data:
       mongodb:
-        host: payment-mongodb
+        host: localhost
         username: user
         password: user
         database: piggymetrics
@@ -20,3 +32,7 @@ eureka:
 server:
   context-path: /payments
   port: 9000
+
+logging:
+  level:
+    org.springframework.security.oauth2=DEBUG

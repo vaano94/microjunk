@@ -59,11 +59,8 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer
-                .tokenKeyAccess("hasAuthority('ROLE_TRUSTED_CLIENT')")
-                .checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
-//        oauthServer
-//                .tokenKeyAccess("permitAll()")
-//                .checkTokenAccess("isAuthenticated()");
+                .tokenKeyAccess("permitAll()") // needed for accessing a public key
+                .checkTokenAccess("isAuthenticated()");
     }
 
     @Override
@@ -79,14 +76,28 @@ public class AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
                     .refreshTokenValiditySeconds(refreshTokenValiditySeconds)
                     .secret("secret")
                 .and()
-                .withClient("register-app")
-                .authorities(Role.ROLE_REGISTER.toString())
-                .authorizedGrantTypes("client_credentials")
-                .scopes("register")
-                .accessTokenValiditySeconds(10)
-                .refreshTokenValiditySeconds(10)
-                .resourceIds(resourceId)
-                .secret("secret");
+                    .withClient("register-app")
+                    .authorities(Role.ROLE_REGISTER.toString())
+                    .authorizedGrantTypes("client_credentials")
+                    .scopes("register")
+                    .accessTokenValiditySeconds(10)
+                    .refreshTokenValiditySeconds(10)
+                    .resourceIds(resourceId)
+                    .secret("secret")
+
+                .and()
+                    .withClient("payment-sender")
+                    .secret("payment")
+                    .resourceIds(resourceId)
+                    .authorizedGrantTypes("client_credentials", "refresh_token")
+                    .scopes("server")
+                .and()
+                    .withClient("notification-service")
+                    .secret("notification")
+                    .resourceIds(resourceId)
+                    .authorizedGrantTypes("client_credentials", "refresh_token")
+                    .scopes("server")
+        ;
     }
 
     @Bean

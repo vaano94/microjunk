@@ -11,24 +11,34 @@ zuul:
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
-
   # works via ip request, example: http://localhost:10000/payment-sender/test/get
   routes:
     payment-sender:
         url: http://localhost:9000/payments
         path: /payment-sender/**
         #stripPrefix: false
-        #sensitiveHeaders:
+        sensitiveHeaders:
 
     # works only with eureka service example : http://localhost:10000/payment-service/payments/test/get
     # http://localhost:10000/notification-service/notifications/version calls for another service via feign client
     payment-service:
         serviceId: payment-sender
         path: /payment-service/**
+        sensitiveHeaders:
 
     notification-service:
         serviceId: notification-service
         path: /notification-service/**
+        sensitiveHeaders:
+
+    auth-service:
+        url: http://localhost:8081/auth
+        path: /auth-service/**
+        sensitiveHeaders: Cookie,Set-Cookie
+#       for auth service if you use Authorization sensitive header OR just skip this configuration string
+#       then zuul will not share them with the auth filters
+#       more info at:
+#       https://github.com/spring-cloud/spring-cloud-netflix/blob/master/docs/src/main/asciidoc/spring-cloud-netflix.adoc#cookies-and-sensitive-headers
 
 management:
   security:
@@ -37,4 +47,5 @@ management:
 eureka:
   client:
     serviceUrl:
-      defaultZone: ${EUREKA_URI:http://registry:8761/eureka}
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    property-resolver:
